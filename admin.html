@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>VICA CGKT3</title>
+    <link rel="shortcut icon" href="logo.png" />
+    <meta charset="utf-8" />
+    <link href="style-admin.css" rel="stylesheet" />
+    <script type="text/javascript" src="chatclient.js"></script>
+    <script src="adapter.js"></script>
+    <script>
+      function startTime() {
+        var today = new Date();
+        var h = today.getHours();
+        var m = today.getMinutes();
+        var s = today.getSeconds();
+        m = checkTime(m);
+        s = checkTime(s);
+        document.getElementById("jam").innerHTML = h + ":" + m + ":" + s;
+        var t = setTimeout(function () {
+          startTime();
+        }, 500);
+      }
+
+      function checkTime(i) {
+        if (i < 10) {
+          i = "0" + i;
+        } // add zero in front of numbers < 10
+        return i;
+      }
+
+      const aduh = setInterval(popupNih, 1000);
+
+      function popupNih() {
+        var listItems = document.getElementsByTagName("li");
+        var totalListItems = listItems.length;
+        if (totalListItems > 1) {
+          document.getElementById("xyz").play();
+          clearInterval(aduh);
+          document.getElementById("popo").classList.toggle("active");
+        }
+      }
+
+      function suara() {
+        document.getElementById("xyz").play();
+      }
+
+      // const intID = setInterval(function () {
+      //   var listItems = document.getElementsByTagName("li");
+      //   var totalListItems = listItems.length;
+      //   if (totalListItems > 1) {
+      //     document.getElementById("popo").classList.toggle("active");
+      //     document.getElementById("xyz").play();
+      //     clearInterval(intID);
+      //       // document.getElementById("popup-1").classList.toggle("active");
+      //       // alert("Incoming call");
+
+      //   }
+      // }, 1000);
+
+      function stopSuara() {
+        // aduh = setInterval(popupNih, 1000);
+        document.getElementById("xyz").pause();
+        //document.getElementById("xyz").stop();
+        document.getElementById("popo").classList.remove("active");
+      }
+    </script>
+  </head>
+
+  <body onload="connect(); startTime();">
+    <div class="popup" id="popo">
+      <div class="content">
+        <div class="close-btn" onclick="stopSuara()">&times;</div>
+        <h1>Incoming Call</h1>
+        <button onclick="stopSuara()">OK</button>
+      </div>
+    </div>
+    <div class="container">
+      <div class="header">
+        <img src="header.png" alt="Header" height="300" />
+        <span id="jam"></span>
+        <input
+          type="radio"
+          name="cat_radio"
+          value="Administrator"
+          checked
+          hidden
+        />
+        <!-- <input id="name" value="Administrator (me)" type="text" maxlength="12" required autocomplete="username"
+        inputmode="verbatim" placeholder="Username" hidden> -->
+        <!-- <input type="button" name="login" value="Start Server" onclick="connect()"> -->
+      </div>
+      <div class="incomingbox">
+        <audio id="xyz" src="bell.mp3" preload="auto"></audio>
+        <!-- <button onclick="countListItems()">Count List Items</button> -->
+        <h2>Incoming Call</h2>
+        <span>Click to open camera</span>
+        <ul class="userlistbox"></ul>
+      </div>
+      <div class="historiesbox">
+        <h2>Call History</h2>
+      </div>
+      <div class="notesbox"></div>
+      <div class="camerabox">
+        <video id="received_video" autoplay></video>
+        <video id="local_video" autoplay muted></video>
+        <button
+          id="hangup-button"
+          onclick="hangUpCall();"
+          role="button"
+          disabled
+        >
+          <img src="hangup.png" />
+        </button>
+      </div>
+    </div>
+  </body>
+</html>

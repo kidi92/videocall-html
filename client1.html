@@ -1,0 +1,47 @@
+<!doctype html>
+<html>
+
+<head>
+  <title>VICA CGKT3</title>
+  <link rel="shortcut icon" href="logo.png" />
+  <meta charset="utf-8">
+  <link href="style-client.css" rel="stylesheet">
+  <script type="text/javascript" src="chatclient.js"></script>
+  <script src="adapter.js"></script>
+</head>
+
+<body>
+  <div class="container">
+    <div class="infobox" id="infobox">
+      <input id="cta-btn" type="button" name="login" value="Lets Talk"
+        onclick="document.getElementById('category').style.visibility = 'visible';">
+    </div>
+    <div class="category" id="category">
+      <input type="radio" id="cat_1" name="cat_radio" value="Vica BL Inter - Category Flights">
+      <input type="radio" id="cat_2" name="cat_radio" value="Vica BL Inter - Category Baggage">
+      <input type="radio" id="cat_3" name="cat_radio" value="Vica BL Inter - Category Places">
+      <input type="radio" id="cat_4" name="cat_radio" value="Vica BL Inter - Category Facilities">
+      <input type="radio" id="cat_5" name="cat_radio" value="Vica BL Inter - Category Others">
+      <input id="cat-btn" type="button" name="login" value="Continue" onclick="connect()">
+    </div>
+    <ul class="userlistbox" style="visibility: hidden;"></ul>
+    <div class="chatbox" style="visibility: hidden;"></div>
+    <div class="camerabox" id="camerabox">
+      <video id="received_video" autoplay></video>
+      <video id="local_video" autoplay muted></video>
+      <button id="hangup-button" onclick="hangUpCall();" role="button" disabled>
+        <img src="hangup.png">
+      </button>
+      <button id="exit-btn" onclick="location.reload()">X</button>
+    </div>
+    <div class="empty-container" style="visibility: hidden;"></div>
+    <div class="chat-controls" style="visibility: hidden;">
+      Chat:<br />
+      <input id="text" type="text" name="text" size="100" maxlength="256" placeholder="Say something meaningful..."
+        autocomplete="off" onkeyup="handleKey(event)" disabled>
+      <input type="button" id="send" name="send" value="Send" onclick="handleSendButton()" disabled>
+    </div>
+  </div>
+</body>
+
+</html>
